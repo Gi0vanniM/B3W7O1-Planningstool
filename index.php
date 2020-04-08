@@ -10,13 +10,10 @@ $char = $table->fetchAll(PDO::FETCH_BOTH);
 // }
 
 ?>
-<?php include("assets/includes/head.php") ?>
+<?php include("assets/includes/header.php") ?>
 
 
-<body>
+<a name="" id="" class="btn btn-primary" href="plan.php" role="button">Create event</a>
 
-    <a name="" id="" class="btn btn-primary" href="plan.php" role="button">Create event</a>
 
-</body>
-
-</html>
+<?php include("assets/includes/footer.php") ?>

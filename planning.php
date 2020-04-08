@@ -1,10 +1,8 @@
 <?php
 
 ?>
-<?php include("assets/includes/head.php") ?>
+<?php include("assets/includes/header.php") ?>
 
 
-<body>
-    
-</body>
-</html>
+
+<?php include("assets/includes/footer.php") ?>
