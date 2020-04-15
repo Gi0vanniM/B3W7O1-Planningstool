@@ -9,7 +9,10 @@ function addParticipant(amount) {
     var newInput = document.createElement("input");
     newInput.id = "participant";
     newInput.type = "text";
-    newInput.classList = "form-control col-7 ml-auto";
+    newInput.classList = "mt-1 form-control col-7 ml-auto";
+    newInput.name = "participants[]";
+    newInput.required = "";
+    // newInput.setAttribute("required", "");
     document.getElementById("addParticipantsInput").appendChild(newInput);
 
 }

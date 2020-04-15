@@ -1,16 +1,14 @@
 <?php
-require("connectDatabase.php");
-$pdo = connect();
+require("database.php");
+
 
 function getAllGames()
 {
-    global $pdo;
-
+    $pdo = connect();
     $table = $pdo->query('SELECT * FROM games ORDER BY name');
-
     $games = $table->fetchAll(PDO::FETCH_ASSOC);
-
-    $pdo = null;
+    disconnect();
 
     return $games;
 }
+

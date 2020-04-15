@@ -1,5 +1,5 @@
 <?php
-require("assets/includes/connectDatabase.php");
+require("assets/includes/database.php");
 $pdo = connect();
 
 $table =$pdo->query('SELECT * FROM games ORDER BY name');
@@ -13,7 +13,7 @@ $char = $table->fetchAll(PDO::FETCH_BOTH);
 <?php include("assets/includes/header.php") ?>
 
 
-<a name="" id="" class="btn btn-primary" href="plan.php" role="button">Create event</a>
+<a name="" id="" class="btn btn-primary" href="plan.php" role="button">Schedule new game</a>
 
 
 <?php include("assets/includes/footer.php") ?>

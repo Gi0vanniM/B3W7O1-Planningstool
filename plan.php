@@ -12,17 +12,18 @@ $games = getAllGames();
 <div class="container">
 
     <!-- FORM -->
-    <form action="addEvent" method="post" class="m-5 p-5 bg-light">
+    <form action="addSchedule.php" method="post" class="m-5 p-5 bg-light">
 
         <div class="col-12">
-            <h1 class="text-center mb-5">Add event</h1>
+            <h1 class="text-center mb-5">Schedule game</h1>
         </div>
 
         <!-- SELECT GAME -->
         <div class="form-group row">
-            <label for="selecetGame" class="col-4 col-form-label">Select game:</label>
-            <select name="game" id="selectGame" class="col-8 form-control">
+            <label for="selecetGame" class="col-4 col-form-label" id="">Select game:</label>
+            <select name="game" id="selectGame" class="col-8 form-control custom-select" required>
                 <!-- GET THE GAMES FROM DATABASE -->
+                <option value="">- Choose game -</option>
                 <?php foreach ($games as $game) { ?>
                 <option value="<?=$game["id"]?>"><?=$game["name"]?></option>
                 <?php } ?>
@@ -32,13 +33,15 @@ $games = getAllGames();
 
         <!-- SELECT DATE AND TIME -->
         <div class="form-group row">
-            <label for="datetime" class="col-4 col-form-label">Select date and time:</label>
+            <label for="date time" class="col-4 col-form-label">Select date and time:</label>
+            <input name="date" type="date" class="form-control col-4 mr-1" id="" required>
+            <input name="time" type="time" class="form-control col-3 ml-auto" required>
         </div>
 
-        <!-- INPUT EXPLAINER -->
+        <!-- INPUT host -->
         <div class="form-group row">
-            <label for="explainer" class="col-4 col-form-label">Explainer:</label>
-            <input type="text" class="form-control col-8" id="explainer">
+            <label for="hoster" class="col-4 col-form-label">Host:</label>
+            <input name="hoster" type="text" class="form-control col-8" id="hoster" required>
         </div>
 
         <!-- INPUT PARTICIPANTS -->
@@ -51,7 +54,7 @@ $games = getAllGames();
                 </button>
             </div>
 
-            <input id="participant" type="text" class="form-control col-7">
+            <input name="participants[]" id="participant" type="text" class="form-control col-7">
         </div>
 
         <div class="form-group row ml-0 mb-0">
@@ -63,6 +66,8 @@ $games = getAllGames();
 
 </div>
 
+
+<!-- PASS PHP ARRAY TO JAVASCRIPT -->
 <script>
 var games = <?php echo json_encode($games) ?>
 </script>
