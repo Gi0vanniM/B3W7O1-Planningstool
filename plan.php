@@ -69,7 +69,9 @@ $games = getAllGames();
 
 <!-- PASS PHP ARRAY TO JAVASCRIPT -->
 <script>
+//#region
 var games = <?php echo json_encode($games) ?>
+//#endregion
 </script>
 
 <!-- </body> and </html> is inside footer.php -->

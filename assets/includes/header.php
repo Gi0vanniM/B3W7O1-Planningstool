@@ -1,3 +1,11 @@
+<?php
+if (isset($title)) {
+    $title .= " - Planningstool";
+} else {
+    $title = "Planningstool";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,12 +28,21 @@
     </script>
     <!-- FONTAWESOME -->
     <script src="https://kit.fontawesome.com/a3078cd2a7.js" crossorigin="anonymous"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
     <!-- TITLE -->
-    <title>Planningstool</title>
+    <title><?php echo $title ?></title>
 </head>
 
 <body>
 
-    <header>
+    <header class="page-header row p-1 m-0 bg-dark">
+
+    <ul class="nav ">
+        <li class="nav-item p-1"><a class="nav-link btn btn-primary" href="index.php"><i class="fas fa-home"></i> Home</a></li>
+        <li class="nav-item p-1"><a class="nav-link btn btn-primary" href="planning.php"><i class="far fa-calendar-alt"></i> Planning</a></li>
+        <li class="nav-item p-1"><a class="nav-link btn btn-primary" href="games.php"><i class="fas fa-chess"></i> Games</a></li>
+        <li class="nav-item p-1"><a class="nav-link btn btn-primary" href="tools.php"><i class="fas fa-tools"></i> Tools</a></li>
+    </ul>
 
     </header>

@@ -1,6 +1,7 @@
 <?php
-
+$title = "Planning";
 ?>
+
 <?php include("assets/includes/header.php") ?>
 
 

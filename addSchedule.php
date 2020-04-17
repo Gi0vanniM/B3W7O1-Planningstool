@@ -31,7 +31,10 @@ $stmt->bindParam(':duration', $game);
 $stmt->bindParam(':participants', $parti);
 $stmt->execute();
 
-if ($stmt) {
+$success = false;
+if ($stmt) $success = true;
 
-}
+header("Location: confirmation.php?success=$success");
 
+?>
+<!-- lol -->

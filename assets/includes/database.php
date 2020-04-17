@@ -15,7 +15,7 @@ function connect()
         return $pdo;
     } catch (PDOException $e) {
         $e->getMessage();
-        die("Something went wrong with the database." . $e->getMessage());
+        die("Something went wrong with the database. " . $e->getMessage());
     }
 }
 
