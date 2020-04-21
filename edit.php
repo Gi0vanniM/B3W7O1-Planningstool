@@ -1,12 +1,13 @@
 <?php
-$title = "Planning";
+$title = "Edit";
 
 include("assets/includes/function.php");
 $events = getAllRelevantEvents();
 $games = getAllGameNames();
+//var_dump($games);
 ?>
 
-<?php include("assets/includes/header.php") ?>
+<?php include("assets/includes/header.php"); ?>
 
     <table class="table table-hover table-striped">
         <thead>
@@ -17,12 +18,14 @@ $games = getAllGameNames();
             <th scope="col">Players</th>
             <th scope="col">Duration</th>
             <th scope="col">Status</th>
+            <th scope="col">Edit</th>
         </tr>
         </thead>
         <tbody>
 
-        <?php foreach ($events as $ev) { ?>
-            <tr onclick="window.location='event.php?id=<?= $ev['activity_id'] ?>'">
+        <?php
+        foreach ($events as $ev) { ?>
+            <tr>
                 <th scope="row"><?= $ev['id'] ?></th>
                 <th scope="row"><?= date_format(new DateTime($ev['date']), 'd M H:i') ?></th>
                 <th scope="row"><?= $games[$ev['activity_id']] ?></th>
@@ -33,10 +36,13 @@ $games = getAllGameNames();
                     } else {
                         echo "Waiting";
                     } ?></th>
+                <th scope="col"><a href="editEvent.php?id=<?=$ev['id']?>"><i class="far fa-edit"></i></a></th>
             </tr>
-        <?php } ?>
+        <?php }
+        ?>
 
         </tbody>
     </table>
 
-<?php include("assets/includes/footer.php") ?>
+
+<?php include("assets/includes/footer.php"); ?>

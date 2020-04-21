@@ -4,7 +4,10 @@ function addParticipant(amount) {
 
     var selected = document.getElementById("selectGame").value;
     var inputPart = document.getElementById("participant").parentNode;
-    var game = games.id;
+    var game = games.find(x => x.id === selected);
+
+    console.log(game);
+    console.log(selected);
 
     var newInput = document.createElement("input");
     newInput.id = "participant";
