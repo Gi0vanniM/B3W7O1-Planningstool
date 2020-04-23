@@ -30,6 +30,15 @@ function getAllGameNames()
     return $data;
 }
 
+function getGameById($id)
+{
+    $pdo = connect();
+//    $id = sanitize($id);
+    $table = $pdo->prepare("SELECT * FROM games WHERE id=?");
+    $table->execute([sanitize($id)]);
+    return $table->fetch();
+}
+
 function getDuration($id)
 {
     $id = sanitize($id);

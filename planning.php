@@ -22,7 +22,7 @@ $games = getAllGameNames();
         <tbody>
 
         <?php foreach ($events as $ev) { ?>
-            <tr onclick="window.location='event.php?id=<?= $ev['activity_id'] ?>'">
+            <tr onclick="window.location='event.php?id=<?= $ev['id'] ?>'">
                 <th scope="row"><?= $ev['id'] ?></th>
                 <th scope="row"><?= date_format(new DateTime($ev['date']), 'd M H:i') ?></th>
                 <th scope="row"><?= $games[$ev['activity_id']] ?></th>
