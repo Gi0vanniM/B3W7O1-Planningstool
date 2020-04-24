@@ -20,7 +20,7 @@ $title = "Tools";
 
             <!-- EDIT PLANNING -->
             <div class="card p-2">
-                <a class="card-block stretched-link text-decoration-none text-center" href="edit.php">
+                <a class="card-block stretched-link text-decoration-none text-center" href="editList.php">
                     <h3 class="card-title"><i class="far fa-edit"></i></h3>
                     <p class="card-text">Edit current events</p>
 

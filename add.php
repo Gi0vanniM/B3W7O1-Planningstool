@@ -2,7 +2,7 @@
 // require("assets/includes/connectDatabase.php");
 include("assets/includes/function.php");
 $games = getAllGames(false);
-
+$title = "Add Event";
 ?>
 <?php include("assets/includes/header.php") ?>
     <!-- <body> is inside head.php -->
@@ -11,7 +11,7 @@ $games = getAllGames(false);
     <div class="container">
 
         <!-- FORM -->
-        <form action="addEvent.php" method="post" class="m-5 p-5 bg-light">
+        <form action="pages/addEvent.php" method="post" class="m-5 p-5 bg-light">
 
             <div class="col-12">
                 <h1 class="text-center mb-5">Schedule game</h1>
@@ -63,15 +63,16 @@ $games = getAllGames(false);
 
         </form>
 
+        <?php include("assets/includes/gameInfo.php") ?>
+
     </div>
 
 
     <!-- PASS PHP ARRAY TO JAVASCRIPT -->
     <script>
-        //#region
         var games = <?php echo json_encode($games) ?>;
-        //#endregion
     </script>
+    <script src="assets/js/event.js "></script>
 
     <!-- </body> and </html> is inside footer.php -->
 <?php include("assets/includes/footer.php") ?>

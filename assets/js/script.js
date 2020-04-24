@@ -1,13 +1,18 @@
-
-
 function addParticipant(amount) {
 
     var selected = document.getElementById("selectGame").value;
     var inputPart = document.getElementById("participant").parentNode;
     var game = games.find(x => x.id === selected);
 
-    console.log(game);
-    console.log(selected);
+    if (game == null) return;
+
+    var participantForms = document.querySelectorAll('[id=participant]');
+    var maxPlayers = game['max_players'];
+
+    if (participantForms.length >= maxPlayers) {
+        console.log("Too many players!");
+        return;
+    }
 
     var newInput = document.createElement("input");
     newInput.id = "participant";
@@ -20,10 +25,10 @@ function addParticipant(amount) {
 
 }
 
-function findGameById(game) {
-    return game.id === document.getElementById("selectGame").value;
-}
-
-function insertAfter(add, node) {
-    node.parentNode.insertAfter(add, node.nextSibling);
-}
+// function findGameById(game) {
+//     return game.id === document.getElementById("selectGame").value;
+// }
+//
+// function insertAfter(add, node) {
+//     node.parentNode.insertAfter(add, node.nextSibling);
+// }

@@ -3,3 +3,14 @@
 .card-columns {
     column-count: 4;
 }
+
+.put-to-bottom {
+    position: absolute;
+    bottom: 0;
+}
+
+.event-num {
+    position: absolute;
+    color: gray;
+    font-weight: bold;
+}
