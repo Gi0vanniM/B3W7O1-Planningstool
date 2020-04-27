@@ -6,7 +6,8 @@
 
 .put-to-bottom {
     position: absolute;
-    bottom: 0;
+    /*bottom: 0;*/
+    top: 100%;
 }
 
 .event-num {

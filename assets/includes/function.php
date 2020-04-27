@@ -1,6 +1,5 @@
 <?php
 require("database.php");
-// TODO :: SANITIZE INPUTS BETTER
 
 function getAllGames($allDataOrNah)
 {
@@ -54,7 +53,7 @@ function getDuration($id)
 
 function getPlayerAmount($id)
 {
-    $id = sanitize($id);
+//    $id = sanitize($id);
     $pdo = connect();
     $table = $pdo->prepare("SELECT min_players, max_players FROM games WHERE id=?");
     $table->execute([$id]);
@@ -63,10 +62,16 @@ function getPlayerAmount($id)
     return $data;
 }
 
-function getAllEvents()
+// if false is put in it will only return the relevant events.
+function getAllEvents($all)
 {
     $pdo = connect();
-    $table = $pdo->query('SELECT * FROM planning ORDER BY date');
+    // Get the events that have yet to start and also events that are currently ongoing
+    $query = 'SELECT * FROM planning WHERE DATE_ADD(date, INTERVAL duration MINUTE) >= NOW() ORDER BY date';
+
+    if ($all == true) $query = 'SELECT * FROM planning ORDER BY date';
+
+    $table = $pdo->query($query);
     $data = $table->fetchAll(PDO::FETCH_ASSOC);
 
     disconnect();
@@ -74,15 +79,14 @@ function getAllEvents()
     return $data;
 }
 
-function getAllRelevantEvents()
+function getAllEventsByGame($id)
 {
+    $id = sanitize($id);
     $pdo = connect();
-    // Get the events that have yet to start and also events that are currently ongoing
-    $table = $pdo->query('SELECT * FROM planning WHERE DATE_ADD(date, INTERVAL duration MINUTE) >= NOW() ORDER BY date');
+    $table = $pdo->prepare('SELECT * FROM planning WHERE activity_id=? ORDER BY date');
+    $table->execute([$id]);
     $data = $table->fetchAll(PDO::FETCH_ASSOC);
-
     disconnect();
-
     return $data;
 }
 
@@ -148,6 +152,7 @@ function getEvent($id)
     $table = $pdo->prepare("SELECT * FROM planning WHERE id=?");
     $table->execute([$id]);
     $data = $table->fetch();
+    disconnect();
     return $data;
 }
 
@@ -157,7 +162,7 @@ function editEvent($data, $event)
     $success = false;
 
     if (empty($data['game']) || empty($data['date']) || empty($data['time']) || empty($data['hoster']) || empty($data['participants'])) {
-        header("Location: confirmation.php?success=0&invalidforms=1");
+        header("Location: ../confirmation.php?success=0&invalidforms=1");
         exit();
     }
 
@@ -179,7 +184,7 @@ function editEvent($data, $event)
     $amount = getPlayerAmount($game);
     $length = count($people);
     if ($length > $amount['max_players']) {
-        header("Location: confirmation.php?success=0&players=0");
+        header("Location: ../confirmation.php?success=0&players=0");
         exit();
     }
 
@@ -205,7 +210,8 @@ SET host=:host, date=:date, activity_id=:activity_id, duration=:duration, partic
     return $success;
 }
 
-function deleteEvent($id) {
+function deleteEvent($id)
+{
     $id = sanitize($id);
     $success = false;
 
@@ -214,6 +220,74 @@ function deleteEvent($id) {
     $stmt->execute([$id]);
 
     if ($stmt) $success = true;
+
+    disconnect();
+
+    return $success;
+}
+
+function deleteAllOldEvents()
+{
+    $success = false;
+
+    //'SELECT * FROM planning WHERE DATE_ADD(date, INTERVAL duration MINUTE) >= NOW() ORDER BY date'
+
+    $pdo = connect();
+    $stmt = $pdo->prepare("DELETE FROM planning WHERE DATE_ADD(date, INTERVAL duration MINUTE) <= NOW()");
+    $stmt->execute();
+
+    if ($stmt) $success = true;
+
+    disconnect();
+
+    return $success;
+}
+
+function getParticipants($id)
+{
+    $id = sanitize($id);
+    $pdo = connect();
+    $table = $pdo->prepare("SELECT participants FROM planning WHERE id=?");
+    $table->execute([$id]);
+    $participants = $table->fetch();
+    disconnect();
+
+    return $participants;
+}
+
+function registerParticipant($data)
+{
+    $success = false;
+
+    $id = sanitize($data['id']);
+
+    $participants = json_decode(getParticipants($id)['participants']);
+
+    $max = getPlayerAmount($data['activity_id']);
+    $amount = count($participants);
+
+    if ($amount >= $max['max_players']) {
+        header("Location: ../confirmation.php?success=0&action=register&players=0");
+        exit();
+    }
+
+    $participant = $data['name'];
+
+    if (!empty($participant)) {
+        $participants[] = sanitize($participant);
+    }
+
+    $participants = json_encode($participants);
+
+    $pdo = connect();
+    $stmt = $pdo->prepare("UPDATE planning SET participants=:participants WHERE id=:id");
+    $stmt->bindParam("participants", $participants);
+    $stmt->bindParam("id", $id);
+    $stmt->execute();
+
+    if ($stmt) $success = true;
+
+    disconnect();
 
     return $success;
 }

@@ -2,7 +2,7 @@
 $title = "Planning";
 
 include("assets/includes/function.php");
-$events = getAllRelevantEvents();
+$events = getAllEvents(false);
 $games = getAllGameNames();
 ?>
 

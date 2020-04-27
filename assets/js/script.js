@@ -1,20 +1,20 @@
-function addParticipant(amount) {
+function addParticipant() {
 
-    var selected = document.getElementById("selectGame").value;
-    var inputPart = document.getElementById("participant").parentNode;
-    var game = games.find(x => x.id === selected);
+    let selected = document.getElementById("selectGame").value;
+    let inputPart = document.getElementById("participant").parentNode;
+    let game = games.find(x => x.id === selected);
 
     if (game == null) return;
 
-    var participantForms = document.querySelectorAll('[id=participant]');
-    var maxPlayers = game['max_players'];
+    let participantForms = document.querySelectorAll('[id=participant]');
+    let maxPlayers = game['max_players'];
 
     if (participantForms.length >= maxPlayers) {
         console.log("Too many players!");
         return;
     }
 
-    var newInput = document.createElement("input");
+    let newInput = document.createElement("input");
     newInput.id = "participant";
     newInput.type = "text";
     newInput.classList = "mt-1 form-control col-7 ml-auto";

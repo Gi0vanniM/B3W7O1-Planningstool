@@ -24,8 +24,14 @@ if (isset($_GET['action'])) {
                         case "edit":
                             echo "Game event updated!";
                             break;
+                        case "register":
+                            echo "Participant registered!";
+                            break;
                         case "delete":
                             echo "Game event deleted!";
+                            break;
+                        case "deleteAllOldEvents":
+                            echo "All old events deleted!";
                             break;
                     } ?>
                 </h1>
@@ -45,8 +51,12 @@ if (isset($_GET['action'])) {
                     case "add":
                         echo "add.php";
                         break;
+                    case "register":
+                        echo "planning.php";
+                        break;
                     case "edit":
                     case "delete":
+                    case "deleteAllOldEvents";
                         echo "editList.php";
                         break;
                 } ?>" class="btn btn-primary "><i class="fas fa-long-arrow-alt-left"></i> Back</a>
