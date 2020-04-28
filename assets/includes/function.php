@@ -106,7 +106,7 @@ function addEvent($data)
     $success = false;
 
     if (empty($data['game']) || empty($data['date']) || empty($data['time']) || empty($data['hoster']) || empty($data['participants'])) {
-        header("Location: confirmation.php?success=0&invalidforms=1");
+        header("Location: ../confirmation.php?success=0&invalidforms=1");
         exit();
     }
 
@@ -130,7 +130,7 @@ function addEvent($data)
     $amount = getPlayerAmount($game);
     $length = count($people);
     if ($length > $amount['max_players']) {
-        header("Location: confirmation.php?success=0&players=0");
+        header("Location: ../confirmation.php?success=0&players=0");
         exit();
     }
 
