@@ -34,7 +34,7 @@ $time = $datetime->format("H:i");
 
             <!-- SELECT GAME -->
             <div class="form-group row">
-                <label for="selecetGame" class="col-4 col-form-label" id="">Select game:</label>
+                <label for="selectGame" class="col-4 col-form-label">Select game:</label>
                 <select name="game" id="selectGame" class="col-8 form-control custom-select" required>
                     <!-- GET THE GAMES FROM DATABASE -->
                     <option value="">- Choose game -</option>
@@ -49,9 +49,9 @@ $time = $datetime->format("H:i");
 
             <!-- SELECT DATE AND TIME -->
             <div class="form-group row">
-                <label for="date time" class="col-4 col-form-label">Select date and time:</label>
-                <input name="date" type="date" class="form-control col-4 mr-1" id="" value="<?= $date ?>" required>
-                <input name="time" type="time" class="form-control col-3 ml-auto" value="<?= $time ?>" required>
+                <label for="date" class="col-4 col-form-label">Select date and time:</label>
+                <input name="date" type="date" class="form-control col-4 mr-1" id="date" value="<?= $date ?>" required>
+                <input name="time" type="time" class="form-control col-3 ml-auto" id="time" value="<?= $time ?>" required>
             </div>
 
             <!-- INPUT HOST -->

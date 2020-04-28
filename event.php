@@ -1,6 +1,8 @@
 <?php
 include("assets/includes/function.php");
 
+if (empty($_GET['id'])) exit("Error 404.");
+
 if (isset($_GET['id'])) {
     $eventId = $_GET['id'];
     $event = getEvent($eventId);

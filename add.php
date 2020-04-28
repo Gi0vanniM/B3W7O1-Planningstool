@@ -19,7 +19,7 @@ $title = "Add Event";
 
             <!-- SELECT GAME -->
             <div class="form-group row">
-                <label for="selecetGame" class="col-4 col-form-label" id="">Select game:</label>
+                <label for="selectGame" class="col-4 col-form-label">Select game:</label>
                 <select name="game" id="selectGame" class="col-8 form-control custom-select" required>
                     <!-- GET THE GAMES FROM DATABASE -->
                     <option value="">- Choose game -</option>
@@ -32,9 +32,9 @@ $title = "Add Event";
 
             <!-- SELECT DATE AND TIME -->
             <div class="form-group row">
-                <label for="date time" class="col-4 col-form-label">Select date and time:</label>
-                <input name="date" type="date" class="form-control col-4 mr-1" id="" required>
-                <input name="time" type="time" class="form-control col-3 ml-auto" required>
+                <label for="date" class="col-4 col-form-label" id="dateTimeLabel">Select date and time:</label>
+                <input name="date" type="date" class="form-control col-4 mr-1" id="date" required>
+                <input name="time" type="time" class="form-control col-3 ml-auto" id="time" required>
             </div>
 
             <!-- INPUT host -->

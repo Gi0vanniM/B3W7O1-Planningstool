@@ -9,7 +9,7 @@ function getAllGames($allDataOrNah)
 
     $pdo = connect();
 
-    $table = $pdo->query('SELECT ' . $select . ' FROM games ORDER BY name');
+    $table = $pdo->query('SELECT ' . $select . ' FROM games ');
     $games = $table->fetchAll(PDO::FETCH_ASSOC);
     disconnect();
 
@@ -76,6 +76,16 @@ function getAllEvents($all)
 
     disconnect();
 
+    return $data;
+}
+
+function getAllEventsToday()
+{
+    $pdo = connect();
+    $table = $pdo->prepare("SELECT * FROM planning WHERE DATE(date) = DATE(NOW())");
+    $table->execute();
+    $data = $table->fetchAll(PDO::FETCH_ASSOC);
+    disconnect();
     return $data;
 }
 
@@ -229,8 +239,6 @@ function deleteEvent($id)
 function deleteAllOldEvents()
 {
     $success = false;
-
-    //'SELECT * FROM planning WHERE DATE_ADD(date, INTERVAL duration MINUTE) >= NOW() ORDER BY date'
 
     $pdo = connect();
     $stmt = $pdo->prepare("DELETE FROM planning WHERE DATE_ADD(date, INTERVAL duration MINUTE) <= NOW()");
